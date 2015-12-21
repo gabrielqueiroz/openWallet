@@ -1,37 +1,68 @@
 package com.gqueiroz.openwallet;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity {
+import com.gqueiroz.adapters.ItemAdapter;
+import com.gqueiroz.database.DatabaseHandler;
+import com.gqueiroz.database.Item;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private ItemAdapter itemAdapter;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        findItemsByID();
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Open Wallet");
+
+        DatabaseHandler databaseHandler = new DatabaseHandler(getApplicationContext());
+        List<Item> items = databaseHandler.getAllItems();
+
+        linearLayoutManager = new LinearLayoutManager(MainActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        itemAdapter = new ItemAdapter(items);
+        recyclerView.setAdapter(itemAdapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_ajuda) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void findItemsByID(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItems);
+
     }
 }
