@@ -53,7 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemNome = (TextView) v.findViewById(R.id.itemNome);
             itemValor = (TextView) v.findViewById(R.id.itemValor);
             itemImagem = (ImageView) v.findViewById(R.id.itemImagem);
-            card = (CardView) v.findViewById(R.id.card_view);
+            card = (CardView) v.findViewById(R.id.cardItem);
         }
     }
 }
