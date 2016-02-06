@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">openWallet</string>
+    <string name="app_name">OpenWallet</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_item">ItemActivity</string>
+    <string name="action_settings">Configuracoes</string>
+    <string name="title_activity_item">Carteira</string>
+    <string name="title_activity_item_add_rem">Adicionar | Remover</string>
+    <string name="title_activity_item_novo">Novo Item</string>
+
 </resources>

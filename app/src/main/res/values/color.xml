@@ -3,8 +3,8 @@
     <color name="colorPrimary">#80D8FF</color>
     <color name="colorPrimaryDark">#40C4FF</color>
 
-    <color name="colorAccent">#FF5252</color>
-    <color name="colorAccentRipple">#FF1744</color>
+    <color name="colorAccent">#F50057</color>
+    <color name="colorAccentRipple">#C51162</color>
 
     <color name="colorAdd">#00E676</color>
     <color name="colorAddRipple">#00E676</color>
@@ -15,4 +15,21 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColor">#000000</color>
     <color name="inactive">#BDBDBD</color>
+
+    <!-- Cor gradiente do tema -->
+    <color name="colorPrimaryDark1">#00B0FF</color>
+    <color name="colorPrimaryDark2">#0091EA</color>
+
+    <!-- Cores para objetos do Sistema -->
+    <color name="vermelho">#FF5252</color>
+    <color name="verde">#81C784</color>
+    <color name="amarelo">#FFF176</color>
+    <color name="roxo">#B39DDB</color>
+    <color name="laranja">#FFB74D</color>
+    <color name="azul">#64B5F6</color>
+    <color name="rosa">#F06292</color>
+    <color name="ciano">#80DEEA</color>
+    <color name="marrom">#A1887F</color>
+    <color name="indigo">#9FA8DA</color>
+
 </resources>

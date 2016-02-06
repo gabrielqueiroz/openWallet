@@ -1,0 +1,229 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gqueiroz.openwallet.ItemAddRem">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_actionbar" />
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="15dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/backgroundValor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$"
+                    android:textSize="30sp"
+                    android:layout_margin="5dp"/>
+
+                <EditText
+                    android:id="@+id/itemValor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="0.0"
+                    android:textSize="30sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/backgroundAdd"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/backgroundValor"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/add1"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+ 1"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/add5"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+ 5"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/add10"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+ 10"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/add20"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark2"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+ 20"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/backgroundRem"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/backgroundAdd"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rem1"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="- 1"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/rem5"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="- 5"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/rem10"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="- 10"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/rem20"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark2"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="- 20"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView1"
+        android:layout_margin="15dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/referencias"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:minHeight="40dp" />
+
+            <LinearLayout
+                android:id="@+id/backgroundReferencias"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/referencias"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/adicionaReferencia"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Adicionar"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/removeReferencia"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight=".25"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Remover"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/itemAddRem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:src="@drawable/ic_done_white_48dp"
+        app:backgroundTint="@color/colorAccent"
+        app:rippleColor="@color/colorAccentRipple"
+        app:borderWidth="0dp"
+        app:elevation="5dp"/>
+
+</RelativeLayout>
