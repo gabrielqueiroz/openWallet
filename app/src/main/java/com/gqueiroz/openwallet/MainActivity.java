@@ -1,12 +1,15 @@
 package com.gqueiroz.openwallet;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gqueiroz.adapters.ItemAdapter;
 import com.gqueiroz.database.DatabaseHandler;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemAdapter itemAdapter;
 
     private Toolbar toolbar;
+    private FloatingActionButton novoItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         itemAdapter = new ItemAdapter(items);
         recyclerView.setAdapter(itemAdapter);
+
+        novoItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ItemNovo.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -63,6 +75,6 @@ public class MainActivity extends AppCompatActivity {
     public void findItemsByID(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItems);
-
+        novoItem = (FloatingActionButton) findViewById(R.id.novoItem);
     }
 }
