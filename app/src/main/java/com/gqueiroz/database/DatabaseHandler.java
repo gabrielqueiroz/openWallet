@@ -15,7 +15,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String dbName = "openWallet";
     private static final int dbVersion = 3;
 
-    private static final String tableItem = "itens";
+    private static final String tableName = "items";
 
     private static final String itemId = "itemId";
     private static final String itemNome = "itemName";
@@ -42,7 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sampleDB) {
-        sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableItem + "(itemId INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemValue REAL, itemImage TEXT, itemCor TEXT);");
+        sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + "(itemId INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemValue REAL, itemImage TEXT);");
 
         String icone1 = String.valueOf(R.drawable.ic_account_balance_white_48dp);
         String icone2 = String.valueOf(R.drawable.ic_shopping_cart_white_48dp);
@@ -64,7 +64,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sampleDB, int oldVersion, int newVersion) {
-        sampleDB.execSQL("DROP TABLE IF EXISTS " + tableItem);
+        sampleDB.execSQL("DROP TABLE IF EXISTS " + tableName);
         onCreate(sampleDB);
     }
 
@@ -87,6 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return itemQuery;
     }
+
 
     public List<Item> getAllItems() {
         List<Item> results = new ArrayList<>();
