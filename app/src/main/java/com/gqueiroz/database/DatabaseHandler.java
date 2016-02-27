@@ -5,13 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.gqueiroz.openwallet.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String dbName = "openWallet";
-    private static final int dbVersion = 2;
+    private static final int dbVersion = 3;
 
     private static final String tableItem = "itens";
 
@@ -19,6 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String itemNome = "itemName";
     private static final String itemValue = "itemValue";
     private static final String itemImage = "itemImage";
+    private static final String itemCor = "itemCor";
 
     private static final String tableReferencias = "referencias";
 
@@ -33,23 +36,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String historicoReferencia = "historicoReferencia";
     private static final String historicoItem = "historicoItem";
 
-    private final Item item1 = new Item(1, "Carteira", 99.90, "Carteira");
-    private final Item item2 = new Item(2, "Banco", 99.90, "Banco");
-    private final Item item3 = new Item(3, "Cartao de Credito", 99.90, "Cartao de Credito");
-    private final Item[] defaultItems = new Item[]{item1, item2, item3};
-
     public DatabaseHandler(Context context) {
         super(context, dbName, null, dbVersion);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sampleDB) {
-        sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableItem + "(itemId INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemValue REAL, itemImage TEXT);");
+        sampleDB.execSQL("CREATE TABLE IF NOT EXISTS " + tableItem + "(itemId INTEGER PRIMARY KEY AUTOINCREMENT, itemName TEXT, itemValue REAL, itemImage TEXT, itemCor TEXT);");
+
+        String icone1 = String.valueOf(R.drawable.ic_account_balance_white_48dp);
+        String icone2 = String.valueOf(R.drawable.ic_shopping_cart_white_48dp);
+        String icone3 = String.valueOf(R.drawable.ic_card_travel_white_48dp);
+
+        String color1 = String.valueOf(R.color.colorPrimary);
+        String color2 = String.valueOf(R.color.colorPrimaryDark1);
+        String color3 = String.valueOf(R.color.colorPrimaryDark2);
+
+        Item item1 = new Item(1, "Banco", 99.90, icone1, color1);
+        Item item2 = new Item(2, "Supermercado", 99.90, icone2, color2);
+        Item item3 = new Item(3, "Cartao de Crédito", 99.90, icone3, color3);
+        Item[] defaultItems = new Item[]{item1, item2, item3};
 
         for (Item item : defaultItems)
             sampleDB.execSQL("INSERT INTO " + tableItem + " Values ('" + String.valueOf(item.getId()) + "', " +
-                    "'" + item.getName() + "', '" + String.valueOf(item.getValue()) + "', '" + item.getImage() + "');");
-
+                    "'" + item.getName() + "', '" + String.valueOf(item.getValue()) + "', '" + item.getImage() + "', '" + String.valueOf(item.getColor()) + "');");
     }
 
     @Override
@@ -58,34 +68,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(sampleDB);
     }
 
+    public void insertIntoItem(Item item) {
+        SQLiteDatabase sampleDB = this.getReadableDatabase();
+        sampleDB.execSQL("INSERT INTO " + tableItem + " Values ('" + String.valueOf(item.getId()) +
+                "', " + item.getName() + "', '" + String.valueOf(item.getValue()) +
+                "', '" + item.getImage() + "', '" + String.valueOf(item.getColor()) + "');");
+    }
+
     public Item getItemByName(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor c = db.query(tableItem, new String[]{itemId, itemNome, itemValue, itemImage}, itemNome + "=?", new String[]{name}, null, null, null, null);
+        Cursor cursor = db.query(tableItem, new String[]{itemId, itemNome, itemValue, itemImage, itemCor}, itemNome + "=?", new String[]{name}, null, null, null, null);
 
-        if (c != null)
-            c.moveToFirst();
+        if (cursor != null)
+            cursor.moveToFirst();
 
-        Item itemQuery = new Item(Integer.parseInt(c.getString(0)), c.getString(1), Double.parseDouble(c.getString(2)), c.getString(3));
+        Item itemQuery = new Item(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Double.parseDouble(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
 
         return itemQuery;
     }
-
 
     public List<Item> getAllItems() {
         List<Item> results = new ArrayList<>();
         SQLiteDatabase sampleDB = this.getReadableDatabase();
 
-        Cursor c = sampleDB.rawQuery("SELECT itemName, itemValue FROM " + tableItem, null);
+        Cursor cursor = sampleDB.rawQuery("SELECT itemName, itemValue, itemImage, itemCor FROM " + tableItem, null);
 
-        if (c != null && c.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 Item item = new Item();
-                item.setName(c.getString(c.getColumnIndex("itemName")));
-                item.setValue(c.getDouble(c.getColumnIndex("itemValue")));
+                item.setName(cursor.getString(cursor.getColumnIndex("itemName")));
+                item.setValue(cursor.getDouble(cursor.getColumnIndex("itemValue")));
+                item.setImage(cursor.getString(cursor.getColumnIndex("itemImage")));
+                item.setColor(cursor.getString(cursor.getColumnIndex("itemCor")));
                 results.add(item);
-            } while (c.moveToNext());
-                c.close();
+            } while (cursor.moveToNext());
+            cursor.close();
         }
 
         return results;

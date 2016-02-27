@@ -1,6 +1,8 @@
 package com.gqueiroz.adapters;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,13 +20,13 @@ import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
     public List<Item> itemList;
-
     public ItemAdapter(List<Item> itemList) {
         this.itemList = itemList;
     }
 
     @Override
     public ItemAdapter.ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.layout_item, viewGroup, false);
@@ -37,6 +39,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         final Item item = itemList.get(position);
         itemViewHolder.itemNome.setText(item.getName());
         itemViewHolder.itemValor.setText("R$ " + String.valueOf(item.getValue()));
+        //itemViewHolder.itemImagem.setImageDrawable(ContextCompat.getDrawable(, Integer.parseInt(item.getImage())));
 
         itemViewHolder.itemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
