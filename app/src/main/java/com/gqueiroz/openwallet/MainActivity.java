@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        itemAdapter = new ItemAdapter(items);
+        itemAdapter = new ItemAdapter(items, getApplicationContext());
         recyclerView.setAdapter(itemAdapter);
 
         novoItem.setOnClickListener(new View.OnClickListener() {

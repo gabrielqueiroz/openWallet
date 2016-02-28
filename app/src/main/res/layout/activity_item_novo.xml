@@ -1,25 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gqueiroz.openwallet.ItemNovo">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/layout_actionbar" />
-
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_height="fill_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/layout_actionbar" />
+
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cardView1"
+                android:layout_below="@+id/toolbar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -32,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:hint="Nome do Item"
+                    android:inputType="textCapSentences"
                     android:textSize="20sp" />
 
             </android.support.v7.widget.CardView>
@@ -54,66 +56,66 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selecione um ícone e cor"
-                        android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
-                        android:textSize="18sp"/>
+                        android:layout_marginTop="15dp"
+                        android:text="Selecione um ícone e cor"
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
+                        android:animateLayoutChanges="true"
                         android:gravity="center_vertical|center_horizontal"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:orientation="horizontal"
-                        android:animateLayoutChanges="true">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/icon1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@color/colorPrimary"
                             android:src="@drawable/ic_help_white_48dp"
-                            android:tint="@color/textColorPrimary"
-                            android:background="@color/colorPrimary"/>
+                            android:tint="@color/textColorPrimary" />
 
                         <ImageView
                             android:id="@+id/icon2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@color/colorPrimary"
                             android:src="@drawable/ic_help_white_48dp"
-                            android:tint="@color/textColorPrimary"
-                            android:background="@color/colorPrimary"/>
+                            android:tint="@color/textColorPrimary" />
 
                         <ImageView
                             android:id="@+id/icon3"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_margin="5dp"
+                            android:background="@color/colorPrimary"
                             android:src="@drawable/ic_help_white_48dp"
-                            android:tint="@color/textColorPrimary"
-                            android:background="@color/colorPrimary"/>
+                            android:tint="@color/textColorPrimary" />
 
                         <ImageView
                             android:id="@+id/icon4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@color/colorPrimary"
                             android:src="@drawable/ic_help_white_48dp"
-                            android:tint="@color/textColorPrimary"
-                            android:background="@color/colorPrimary"/>
+                            android:tint="@color/textColorPrimary" />
 
                         <ImageView
                             android:id="@+id/icon5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@color/colorPrimary"
                             android:src="@drawable/ic_help_white_48dp"
-                            android:tint="@color/textColorPrimary"
-                            android:background="@color/colorPrimary"/>
+                            android:tint="@color/textColorPrimary" />
 
                     </LinearLayout>
 
@@ -122,14 +124,14 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="15dp"/>
+                        android:layout_margin="15dp" />
 
                     <SeekBar
                         android:id="@+id/seekBarColor"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="15dp"/>
+                        android:layout_margin="15dp" />
 
                 </LinearLayout>
 
@@ -153,10 +155,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selecione um valor inicial"
-                        android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
-                        android:textSize="18sp"/>
+                        android:layout_marginTop="15dp"
+                        android:text="Insira um valor inicial"
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:id="@+id/backgroundValor"
@@ -177,6 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:inputType="numberDecimal"
                             android:text="0.0"
                             android:textSize="30sp" />
 
@@ -291,14 +294,14 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-            
+
             <Space
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
-                android:layout_below="@id/cardView3"/>
+                android:layout_below="@id/cardView3" />
 
         </RelativeLayout>
-        
+
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -309,9 +312,9 @@
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
         android:src="@drawable/ic_done_white_48dp"
+        app:backgroundTint="@color/colorAccent"
         app:borderWidth="0dp"
         app:elevation="5dp"
-        app:backgroundTint="@color/colorAccent"
         app:rippleColor="@color/colorAccentRipple" />
 
 </RelativeLayout>

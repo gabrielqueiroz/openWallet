@@ -3,14 +3,17 @@
     <color name="colorPrimary">#80D8FF</color>
     <color name="colorPrimaryDark">#40C4FF</color>
 
-    <color name="colorAccent">#FF5252</color>
-    <color name="colorAccentRipple">#FF1744</color>
+    <color name="colorAccent">#E91E63</color>
+    <color name="colorAccentRipple">#D81B60</color>
 
-    <color name="colorAdd">#00E676</color>
-    <color name="colorAddRipple">#00E676</color>
+    <color name="colorAdd">#43A047</color>
+    <color name="colorAddRipple">#388E3C</color>
 
-    <color name="colorRem">#FF7043</color>
-    <color name="colorRemRipple">#FF5722</color>
+    <color name="colorRem">#E53935</color>
+    <color name="colorRemRipple">#D32F2F</color>
+
+    <color name="colorDel">#E53935</color>
+    <color name="colorDelRipple">#D32F2F</color>
 
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColor">#000000</color>
@@ -23,7 +26,7 @@
     <!-- Cores para objetos do Sistema -->
     <color name="vermelho">#FF5252</color>
     <color name="verde">#81C784</color>
-    <color name="amarelo">#FFF176</color>
+    <color name="amarelo">#FDD835</color>
     <color name="roxo">#B39DDB</color>
     <color name="laranja">#FFB74D</color>
     <color name="azul">#64B5F6</color>

@@ -28,6 +28,7 @@
             android:name=".ItemAddRem"
             android:label="@string/title_activity_item_add_rem"
             android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -38,6 +39,7 @@
             android:name=".ItemNovo"
             android:label="@string/title_activity_item_novo"
             android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

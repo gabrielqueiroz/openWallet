@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -101,7 +103,6 @@ public class ItemNovo extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        inserirItem.setOnClickListener(this);
     }
 
     public void changeIcon(int progress) {
@@ -206,6 +207,8 @@ public class ItemNovo extends AppCompatActivity implements View.OnClickListener 
                     aux = 0;
                 break;
             case R.id.novoItem:
+                if(!validaNomeItem(itemNome))
+                    break;
                 DatabaseHandler databaseHandler = new DatabaseHandler(this);
                 databaseHandler.insertIntoItem(novoItem());
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -246,6 +249,8 @@ public class ItemNovo extends AppCompatActivity implements View.OnClickListener 
 
         itemValor = (EditText) findViewById(R.id.itemValor);
 
+        inserirItem = (FloatingActionButton) findViewById(R.id.novoItem);
+
         add1 = (TextView) findViewById(R.id.add1);
         add5 = (TextView) findViewById(R.id.add5);
         add10 = (TextView) findViewById(R.id.add10);
@@ -255,6 +260,8 @@ public class ItemNovo extends AppCompatActivity implements View.OnClickListener 
         rem5 = (TextView) findViewById(R.id.rem5);
         rem10 = (TextView) findViewById(R.id.rem10);
         rem20 = (TextView) findViewById(R.id.rem20);
+
+        inserirItem.setOnClickListener(this);
 
         add1.setOnClickListener(this);
         add5.setOnClickListener(this);
@@ -267,5 +274,12 @@ public class ItemNovo extends AppCompatActivity implements View.OnClickListener 
         rem20.setOnClickListener(this);
     }
 
-
+    public boolean validaNomeItem(EditText itemNome){
+        if (TextUtils.isEmpty(itemNome.getText())) {
+            itemNome.setError("Insira um nome para o item");
+            itemNome.setFocusable(true);
+            return false;
+        }
+        return true;
+    }
 }

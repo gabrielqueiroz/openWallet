@@ -60,4 +60,12 @@ public class Item {
         this.image = image;
         this.color = color;
     }
+
+    public Item(String name, double value, String image, String color) {
+        this.name = name;
+        this.image = image;
+        this.value = value;
+        this.image = image;
+        this.color = color;
+    }
 }

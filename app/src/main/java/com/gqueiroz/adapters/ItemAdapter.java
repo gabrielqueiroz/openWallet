@@ -1,8 +1,11 @@
 package com.gqueiroz.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gqueiroz.database.DatabaseHandler;
 import com.gqueiroz.database.Item;
 import com.gqueiroz.openwallet.R;
 import com.gqueiroz.openwallet.ItemAddRem;
@@ -19,9 +23,13 @@ import com.gqueiroz.openwallet.ItemAddRem;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    public List<Item> itemList;
-    public ItemAdapter(List<Item> itemList) {
+    private Context context;
+    private List<Item> itemList;
+
+    public ItemAdapter(List<Item> itemList, Context context) {
         this.itemList = itemList;
+        this.context = context;
+
     }
 
     @Override
@@ -38,22 +46,63 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(final ItemViewHolder itemViewHolder, int position) {
         final Item item = itemList.get(position);
         itemViewHolder.itemNome.setText(item.getName());
-        itemViewHolder.itemValor.setText("R$ " + String.valueOf(item.getValue()));
-        //itemViewHolder.itemImagem.setImageDrawable(ContextCompat.getDrawable(, Integer.parseInt(item.getImage())));
+        itemViewHolder.itemValor.setText(String.format("R$ %s", String.valueOf(item.getValue())));
+        itemViewHolder.itemImagem.setImageDrawable(ContextCompat.getDrawable(context, Integer.parseInt(item.getImage())));
+        itemViewHolder.backgroundItem.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColor())));
 
-        itemViewHolder.itemAdd.setOnClickListener(new View.OnClickListener() {
+        itemViewHolder.backgroundAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                i.putExtra("id",item.getId());
+                i.putExtra("valor",item.getValue());
+                i.putExtra("extra", "Crédito em "+item.getName());
+                i.putExtra("credito", true);
                 v.getContext().startActivity(i);
             }
         });
 
-        itemViewHolder.itemRem.setOnClickListener(new View.OnClickListener() {
+        itemViewHolder.backgroundRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                i.putExtra("id",item.getId());
+                i.putExtra("valor",item.getValue());
+                i.putExtra("extra", "Débito em "+item.getName());
+                i.putExtra("credito", false);
                 v.getContext().startActivity(i);
+            }
+        });
+
+        itemViewHolder.backgroundDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(v.getContext());
+                alertBuilder.setMessage("Tem certeza que deseja excluir " + item.getName() + "? Todo o histórico de transaçōes será excluído também.");
+                alertBuilder.setCancelable(true);
+
+                alertBuilder.setPositiveButton(
+                        "Sim, excluir",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                DatabaseHandler databaseHandler = new DatabaseHandler(context);
+                                databaseHandler.deleteFromItem(item.getId());
+                                itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                                dataSetChanged();
+                            }
+                        });
+
+                alertBuilder.setNegativeButton(
+                        "Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertBuilder.create();
+                alertDialog.show();
             }
         });
 
@@ -128,5 +177,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             backgroundDel = (LinearLayout) v.findViewById(R.id.backgroundDel);
             backgroundItem = (LinearLayout) v.findViewById(R.id.backgroundItem);
         }
+    }
+
+    @UiThread
+    private void dataSetChanged() {
+        DatabaseHandler databaseHandler = new DatabaseHandler(context);
+        List<Item> newList = databaseHandler.getAllItems();
+
+        itemList.clear();
+        itemList.addAll(newList);
+        this.notifyDataSetChanged();
     }
 }
