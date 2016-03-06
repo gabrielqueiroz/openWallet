@@ -46,15 +46,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:text="R$"
-                            android:textSize="30sp" />
+                            android:textSize="30sp"
+                            android:textStyle="bold"/>
 
                         <EditText
                             android:id="@+id/itemValor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:inputType="numberDecimal"
                             android:text="0.0"
                             android:textSize="30sp" />
@@ -73,7 +76,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/colorGrad1"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="+ 1"
                             android:textColor="@color/textColorPrimary"
@@ -84,7 +87,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@color/colorGrad2"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="+ 5"
                             android:textColor="@color/textColorPrimary"
@@ -95,7 +98,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark1"
+                            android:background="@color/colorGrad3"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="+ 10"
                             android:textColor="@color/textColorPrimary"
@@ -106,7 +109,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark2"
+                            android:background="@color/colorGrad4"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="+ 20"
                             android:textColor="@color/textColorPrimary"
@@ -126,7 +129,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/colorGrad1"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="- 1"
                             android:textColor="@color/textColorPrimary"
@@ -137,7 +140,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@color/colorGrad2"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="- 5"
                             android:textColor="@color/textColorPrimary"
@@ -148,7 +151,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark1"
+                            android:background="@color/colorGrad3"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="- 10"
                             android:textColor="@color/textColorPrimary"
@@ -159,7 +162,7 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight=".25"
-                            android:background="@color/colorPrimaryDark2"
+                            android:background="@color/colorGrad4"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="- 20"
                             android:textColor="@color/textColorPrimary"
@@ -208,6 +211,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center_horizontal|center_vertical"
                             android:text="Adicionar"
+                            android:textStyle="bold"
                             android:textColor="@color/textColorPrimary"
                             android:textSize="20sp" />
 
@@ -241,9 +245,9 @@
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
         android:src="@drawable/ic_done_white_48dp"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimary"
         app:borderWidth="0dp"
         app:elevation="5dp"
-        app:rippleColor="@color/colorAccentRipple" />
+        app:rippleColor="@color/colorPrimaryDark" />
 
 </RelativeLayout>

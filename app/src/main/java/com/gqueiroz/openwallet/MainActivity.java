@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         novoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ItemNovo.class);
+                Intent i = new Intent(getApplicationContext(), ItemNovoTest.class);
                 startActivity(i);
             }
         });

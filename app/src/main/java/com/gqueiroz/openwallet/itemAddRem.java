@@ -2,8 +2,10 @@ package com.gqueiroz.openwallet;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.gqueiroz.database.DatabaseHandler;
+import com.gqueiroz.database.Item;
 
 import java.util.Arrays;
 
@@ -27,6 +31,7 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
 
     private FloatingActionButton itemAddRem;
     private TextView adicionaReferencia;
+    private TextView removerReferencia;
 
     private TextView add1;
     private TextView add5;
@@ -38,9 +43,8 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
     private TextView rem10;
     private TextView rem20;
 
-    private int id = 0;
-    private double value = 0.0;
     private boolean credito = false;
+    private Item item = new Item();
     private String[] referencias = new String[]{"Supermercado", "Farmacia", "Shopping", "Restaurante", "Outros"};
 
     @Override
@@ -48,21 +52,22 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_add_rem);
 
+        findItemsByID();
+
         Bundle extras = getIntent().getExtras();
 
-        String title = "";
-
         if (extras != null) {
-            title = extras.getString("extra");
-            id = extras.getInt("id");
-            value = extras.getDouble("valor");
+            String extra = extras.getString("extra");
+            item = new Gson().fromJson(extra, item.getClass());
             credito = extras.getBoolean("credito");
         }
 
-        findItemsByID();
-
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(title);
+        if(credito)
+            getSupportActionBar().setTitle("Credito em "+item.getName());
+        else
+            getSupportActionBar().setTitle("Debito em "+item.getName());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Arrays.sort(referencias);
@@ -84,12 +89,13 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
                 if(!validaValorItem(itemValor))
                     return;
 
-                itemAddRem(id, value, credito);
+                itemAddRem(item.getId(), item.getValue(), credito);
                 Intent i = new Intent(v.getContext(), MainActivity.class);
                 startActivity(i);
             }
         });
 
+        changeColor(credito);
     }
 
     public void findItemsByID() {
@@ -98,6 +104,7 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
         itemValor = (EditText) findViewById(R.id.itemValor);
 
         adicionaReferencia = (TextView) findViewById(R.id.adicionaReferencia);
+        removerReferencia = (TextView) findViewById(R.id.removeReferencia);
         itemAddRem = (FloatingActionButton) findViewById(R.id.itemAddRem);
 
         add1 = (TextView) findViewById(R.id.add1);
@@ -178,7 +185,7 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
                 LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(75, 0, 75, 0);
 
-        EditText referencia = new EditText(this);
+        final EditText referencia = new EditText(this);
 
         layout.addView(referencia, params);
         alertBuilder.setView(layout);
@@ -203,16 +210,50 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
         alertDialog.show();
     }
 
-    public void itemAddRem(int id, double value, boolean credito) {
+    public void changeColor(boolean credito){
+        if(credito){
+            toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
+            add1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
+            add5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
+            add10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad));
+            add20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGradDark));
+            rem1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
+            rem5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
+            rem10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad));
+            rem20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGradDark));
+            adicionaReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
+            removerReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
+            itemAddRem.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad)));
+        } else {
+            toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
+            add1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
+            add5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
+            add10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad));
+            add20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGradDark));
+            rem1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
+            rem5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
+            rem10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad));
+            rem20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGradDark));
+            adicionaReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
+            removerReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
+            itemAddRem.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad)));
+        }
+    }
+
+    public void itemAddRem(int id, double balance, boolean credito) {
         DatabaseHandler databaseHandler = new DatabaseHandler(getApplicationContext());
-        Double oldValue = Double.valueOf(itemValor.getText().toString());
+        Double value = Double.valueOf(itemValor.getText().toString());
+        Double newBalance;
 
         if (credito)
-            value = value + oldValue;
+            newBalance = balance + value;
         else
-            value = value - oldValue;
+            newBalance = balance - value;
 
-        databaseHandler.updateItemById(id, value);
+        databaseHandler.updateItemById(id, newBalance);
+        databaseHandler.insertIntoHistoric(credito, newBalance, value, id, spinner.getSelectedItem().toString());
     }
 
     public boolean validaValorItem(EditText itemValor){

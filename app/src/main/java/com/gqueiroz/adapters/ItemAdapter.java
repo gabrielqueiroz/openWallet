@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.gqueiroz.database.DatabaseHandler;
 import com.gqueiroz.database.Item;
+import com.gqueiroz.openwallet.ItemActivity;
 import com.gqueiroz.openwallet.R;
 import com.gqueiroz.openwallet.ItemAddRem;
 
@@ -29,7 +32,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public ItemAdapter(List<Item> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
-
     }
 
     @Override
@@ -46,39 +48,40 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(final ItemViewHolder itemViewHolder, int position) {
         final Item item = itemList.get(position);
         itemViewHolder.itemNome.setText(item.getName());
-        itemViewHolder.itemValor.setText(String.format("R$ %s", String.valueOf(item.getValue())));
+        itemViewHolder.itemValor.setText(Html.fromHtml(String.format("<b>R$</b> %s", String.valueOf(item.getValue()))));
         itemViewHolder.itemImagem.setImageDrawable(ContextCompat.getDrawable(context, Integer.parseInt(item.getImage())));
         itemViewHolder.backgroundItem.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColor())));
 
+        itemViewHolder.backgroundAdd.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColorDark())));
         itemViewHolder.backgroundAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ItemAddRem.class);
-                i.putExtra("id",item.getId());
-                i.putExtra("valor",item.getValue());
-                i.putExtra("extra", "Crédito em "+item.getName());
+                String extra = new Gson().toJson(item);
+                i.putExtra("extra", extra);
                 i.putExtra("credito", true);
                 v.getContext().startActivity(i);
             }
         });
 
+        itemViewHolder.backgroundRem.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColorDark())));
         itemViewHolder.backgroundRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), ItemAddRem.class);
-                i.putExtra("id",item.getId());
-                i.putExtra("valor",item.getValue());
-                i.putExtra("extra", "Débito em "+item.getName());
+                String extra = new Gson().toJson(item);
+                i.putExtra("extra", extra);
                 i.putExtra("credito", false);
                 v.getContext().startActivity(i);
             }
         });
 
+        itemViewHolder.backgroundDel.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColorDark())));
         itemViewHolder.backgroundDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(v.getContext());
-                alertBuilder.setMessage("Tem certeza que deseja excluir " + item.getName() + "? Todo o histórico de transaçōes será excluído também.");
+                alertBuilder.setMessage(Html.fromHtml("Tem certeza que deseja <b>excluir " + item.getName() + "</b>? Todo o histórico de transaçōes será excluído também."));
                 alertBuilder.setCancelable(true);
 
                 alertBuilder.setPositiveButton(
@@ -109,9 +112,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.itemImagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemViewHolder.backgroundAdd.setVisibility(View.GONE);
-                itemViewHolder.backgroundRem.setVisibility(View.GONE);
-                itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                if (itemViewHolder.backgroundDel.getVisibility() == View.VISIBLE || itemViewHolder.backgroundAdd.getVisibility() == View.VISIBLE) {
+                    itemViewHolder.backgroundAdd.setVisibility(View.GONE);
+                    itemViewHolder.backgroundRem.setVisibility(View.GONE);
+                    itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                } else {
+                    itemViewHolder.backgroundAdd.setVisibility(View.VISIBLE);
+                    itemViewHolder.backgroundRem.setVisibility(View.VISIBLE);
+                    itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -123,9 +132,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     itemViewHolder.backgroundRem.setVisibility(View.GONE);
                     itemViewHolder.backgroundDel.setVisibility(View.GONE);
                 } else {
-                    itemViewHolder.backgroundAdd.setVisibility(View.VISIBLE);
-                    itemViewHolder.backgroundRem.setVisibility(View.VISIBLE);
-                    itemViewHolder.backgroundDel.setVisibility(View.GONE);
+                    Intent i = new Intent(v.getContext(), ItemActivity.class);
+                    String extra = new Gson().toJson(item);
+                    i.putExtra("extra", extra);
+                    v.getContext().startActivity(i);
                 }
             }
         });
@@ -188,4 +198,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemList.addAll(newList);
         this.notifyDataSetChanged();
     }
+
+
 }

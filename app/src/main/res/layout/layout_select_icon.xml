@@ -1,0 +1,184 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:id="@+id/selectItemPrimary">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="350dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image10"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_shopping_cart_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image11"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_flight_takeoff_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image12"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_card_giftcard_white_48dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image13"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_credit_card_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image14"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_account_balance_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image15"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_card_travel_white_48dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_beach_access_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_motorcycle_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_weekend_white_48dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_favorite_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image5"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_videogame_asset_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image6"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_pets_white_48dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image7"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_fingerprint_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image8"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_vpn_key_white_48dp" />
+
+                <ImageView
+                    android:id="@+id/image9"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight=".3"
+                    android:src="@drawable/ic_face_white_48dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/selectItemVoltar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="Voltar"
+        android:textColor="@color/textColorPrimary" />
+
+</LinearLayout>
