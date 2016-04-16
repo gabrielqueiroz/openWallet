@@ -1,4 +1,4 @@
-package com.gqueiroz.database;
+package com.gqueiroz.repository;
 
 public class Item {
     private int id;

@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.gqueiroz.adapters.ItemAdapter;
-import com.gqueiroz.database.DatabaseHandler;
-import com.gqueiroz.database.Item;
+import com.gqueiroz.repository.DatabaseHandler;
+import com.gqueiroz.repository.Item;
 
 import java.util.List;
 
@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity {
         novoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ItemNovoTest.class);
+                Intent i = new Intent(getApplicationContext(), ItemNovoActivity.class);
                 startActivity(i);
             }
         });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

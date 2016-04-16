@@ -1,4 +1,4 @@
-package com.gqueiroz.database;
+package com.gqueiroz.repository;
 
 import java.sql.Date;
 

@@ -17,11 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.gqueiroz.database.DatabaseHandler;
-import com.gqueiroz.database.Item;
+import com.gqueiroz.repository.DatabaseHandler;
+import com.gqueiroz.repository.Item;
 import com.gqueiroz.openwallet.ItemActivity;
 import com.gqueiroz.openwallet.R;
-import com.gqueiroz.openwallet.ItemAddRem;
+import com.gqueiroz.openwallet.ItemAddRemActivity;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.backgroundAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                Intent i = new Intent(v.getContext(), ItemAddRemActivity.class);
                 String extra = new Gson().toJson(item);
                 i.putExtra("extra", extra);
                 i.putExtra("credito", true);
@@ -68,7 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.backgroundRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                Intent i = new Intent(v.getContext(), ItemAddRemActivity.class);
                 String extra = new Gson().toJson(item);
                 i.putExtra("extra", extra);
                 i.putExtra("credito", false);

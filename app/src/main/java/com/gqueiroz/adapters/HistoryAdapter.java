@@ -1,15 +1,17 @@
 package com.gqueiroz.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gqueiroz.openwallet.R;
-import com.gqueiroz.database.History;
+import com.gqueiroz.repository.History;
 
 import java.util.List;
 
@@ -38,13 +40,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     @Override
     public void onBindViewHolder(final HistoryViewHolder historyViewHolder, int position) {
         final History history = historyList.get(position);
-        historyViewHolder.detalhes.setText("R$ "+String.valueOf(history.getValor())+" com "+history.getReferencia());
-        if(history.getTipo().equals("C"))
-            historyViewHolder.credit.setVisibility(View.VISIBLE);
-        else
-            historyViewHolder.debit.setVisibility(View.VISIBLE);
+        historyViewHolder.historyValue.setText(Html.fromHtml("<b>R$</b> " + history.getValor()));
+        historyViewHolder.historyDetails.setText(Html.fromHtml("com <b>" + history.getReferencia() + "</b> em <b>" + history.getData().toString()+"</b>"));
 
-        historyViewHolder.data.setText(history.getData().toString());
+        if (history.getTipo().equals("C")) {
+            historyViewHolder.backgroundHistory.setBackgroundColor
+                    (ContextCompat.getColor(context, R.color.verde));
+        } else {
+            historyViewHolder.backgroundHistory.setBackgroundColor
+                    (ContextCompat.getColor(context, R.color.vermelho));
+        }
     }
 
     @Override
@@ -53,17 +58,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     public static class HistoryViewHolder extends RecyclerView.ViewHolder {
-        protected ImageView credit;
-        protected ImageView debit;
-        protected TextView detalhes;
-        protected TextView data;
+        protected CardView backgroundHistory;
+        protected TextView historyValue;
+        protected TextView historyDetails;
 
         public HistoryViewHolder(View v) {
             super(v);
-            credit = (ImageView) v.findViewById(R.id.credit);
-            debit = (ImageView) v.findViewById(R.id.debit);
-            detalhes = (TextView) v.findViewById(R.id.detalhes);
-            data = (TextView) v.findViewById(R.id.data);
+            backgroundHistory = (CardView) v.findViewById(R.id.backgroundHistory);
+            historyValue = (TextView) v.findViewById(R.id.historyValue);
+            historyDetails = (TextView) v.findViewById(R.id.historyDetails);
         }
     }
 }

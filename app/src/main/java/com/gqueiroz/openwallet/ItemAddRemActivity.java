@@ -2,14 +2,11 @@ package com.gqueiroz.openwallet;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -18,12 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.gqueiroz.database.DatabaseHandler;
-import com.gqueiroz.database.Item;
+import com.gqueiroz.repository.DatabaseHandler;
+import com.gqueiroz.repository.Item;
 
 import java.util.Arrays;
 
-public class ItemAddRem extends AppCompatActivity implements View.OnClickListener {
+public class ItemAddRemActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
     private EditText itemValor;
@@ -72,7 +69,7 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
 
         Arrays.sort(referencias);
 
-        ArrayAdapter<String> referenciasArray = new ArrayAdapter<>(ItemAddRem.this, android.R.layout.simple_spinner_item, referencias);
+        ArrayAdapter<String> referenciasArray = new ArrayAdapter<>(ItemAddRemActivity.this, android.R.layout.simple_spinner_item, referencias);
         referenciasArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(referenciasArray);
 
@@ -94,8 +91,6 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
                 startActivity(i);
             }
         });
-
-        changeColor(credito);
     }
 
     public void findItemsByID() {
@@ -208,38 +203,6 @@ public class ItemAddRem extends AppCompatActivity implements View.OnClickListene
 
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
-    }
-
-    public void changeColor(boolean credito){
-        if(credito){
-            toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
-            add1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
-            add5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
-            add10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad));
-            add20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGradDark));
-            rem1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
-            rem5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
-            rem10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad));
-            rem20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeGradDark));
-            adicionaReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
-            removerReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.verdeDark));
-            itemAddRem.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.verdeGrad)));
-        } else {
-            toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
-            add1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
-            add5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
-            add10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad));
-            add20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGradDark));
-            rem1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
-            rem5.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
-            rem10.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad));
-            rem20.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGradDark));
-            adicionaReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
-            removerReferencia.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoDark));
-            itemAddRem.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.vermelhoGrad)));
-        }
     }
 
     public void itemAddRem(int id, double balance, boolean credito) {

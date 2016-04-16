@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".ItemAddRem"
+            android:name=".ItemAddRemActivity"
             android:label="@string/title_activity_item_add_rem"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustPan"
@@ -41,18 +41,7 @@
         </activity>
 
         <activity
-            android:name=".ItemNovo"
-            android:label="@string/title_activity_item_novo"
-            android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".ItemNovoTest"
+            android:name=".ItemNovoActivity"
             android:label="@string/title_activity_item_novo"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustPan"

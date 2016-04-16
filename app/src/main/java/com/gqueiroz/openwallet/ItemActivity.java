@@ -1,6 +1,5 @@
 package com.gqueiroz.openwallet;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,9 +19,9 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.gson.Gson;
 import com.gqueiroz.adapters.HistoryAdapter;
-import com.gqueiroz.database.DatabaseHandler;
-import com.gqueiroz.database.History;
-import com.gqueiroz.database.Item;
+import com.gqueiroz.repository.DatabaseHandler;
+import com.gqueiroz.repository.History;
+import com.gqueiroz.repository.Item;
 
 import java.util.List;
 
@@ -37,12 +36,9 @@ public class ItemActivity extends AppCompatActivity {
     private FloatingActionButton actionCredit;
     private FloatingActionButton actionDebit;
 
-    private LinearLayout emptyHistory;
-    private LinearLayout backgroundItem;
-    private LinearLayout backgroundHistory;
-    private ImageView itemImagem;
-    private TextView itemNome;
-    private TextView itemValor;
+    private LinearLayout itemBackground;
+    private ImageView itemIcon;
+    private TextView totalValue;
 
     private Item item = new Item();
 
@@ -66,8 +62,7 @@ public class ItemActivity extends AppCompatActivity {
 
         changeColor();
 
-        itemNome.setText(item.getName());
-        itemValor.setText("R$ "+item.getValue());
+        totalValue.setText(Html.fromHtml("<b>= R$</b>" + item.getValue()));
 
         DatabaseHandler databaseHandler = new DatabaseHandler(getApplicationContext());
         List<History> history = databaseHandler.getAllHistory(item.getId());
@@ -80,15 +75,10 @@ public class ItemActivity extends AppCompatActivity {
         historyAdapter = new HistoryAdapter(history, getApplicationContext());
         recyclerView.setAdapter(historyAdapter);
 
-        if(history.isEmpty()){
-            emptyHistory.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
-
         actionCredit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                Intent i = new Intent(v.getContext(), ItemAddRemActivity.class);
                 String extra = new Gson().toJson(item);
                 i.putExtra("extra",extra);
                 i.putExtra("credito", true);
@@ -99,7 +89,7 @@ public class ItemActivity extends AppCompatActivity {
         actionDebit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ItemAddRem.class);
+                Intent i = new Intent(v.getContext(), ItemAddRemActivity.class);
                 String extra = new Gson().toJson(item);
                 i.putExtra("extra",extra);
                 i.putExtra("credito", false);
@@ -127,26 +117,20 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        //Change Toolbar, StatusBarColor and FloatingActionButton
         toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
         getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColorDark())));
-        //Change Item Color
-        backgroundItem.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
-        backgroundHistory.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
-        itemImagem.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), Integer.parseInt(item.getImage())));
+        itemBackground.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
+        itemIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), Integer.parseInt(item.getImage())));
     }
 
     public void findItemsByID() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewHistory);
-        emptyHistory = (LinearLayout) findViewById(R.id.emptyHistory);
         multipleActions = (FloatingActionsMenu) findViewById(R.id.multipleActions);
         actionCredit = (FloatingActionButton) findViewById(R.id.actionCredit);
         actionDebit = (FloatingActionButton) findViewById(R.id.actionDebit);
-        backgroundItem = (LinearLayout) findViewById(R.id.backgroundItem);
-        backgroundHistory = (LinearLayout) findViewById(R.id.backgroundHistory);
-        itemImagem = (ImageView) findViewById(R.id.itemImagem);
-        itemNome = (TextView) findViewById(R.id.itemNome);
-        itemValor = (TextView) findViewById(R.id.itemValor);
+        itemBackground = (LinearLayout) findViewById(R.id.itemBackground);
+        itemIcon = (ImageView) findViewById(R.id.itemIcon);
+        totalValue = (TextView) findViewById(R.id.totalValue);
     }
 }

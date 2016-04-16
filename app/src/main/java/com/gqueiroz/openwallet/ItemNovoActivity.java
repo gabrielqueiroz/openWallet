@@ -1,29 +1,23 @@
 package com.gqueiroz.openwallet;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.gqueiroz.database.DatabaseHandler;
-import com.gqueiroz.database.Item;
+import com.gqueiroz.repository.DatabaseHandler;
+import com.gqueiroz.repository.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ItemNovoTest extends AppCompatActivity implements View.OnClickListener {
+public class ItemNovoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton inserirItem;
 
@@ -44,7 +38,7 @@ public class ItemNovoTest extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_novo_test);
+        setContentView(R.layout.activity_item_novo);
 
         findViewsById();
 
@@ -58,7 +52,6 @@ public class ItemNovoTest extends AppCompatActivity implements View.OnClickListe
                     return;
                 DatabaseHandler databaseHandler = new DatabaseHandler(v.getContext());
                 databaseHandler.insertIntoItem(novoItem());
-                Log.i("## ITEM ##",novoItem().getImage());
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             }
@@ -67,7 +60,7 @@ public class ItemNovoTest extends AppCompatActivity implements View.OnClickListe
         backgroundNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectIconDialog = new SelectIconDialog(ItemNovoTest.this, color, colorDark, itemImagem);
+                selectIconDialog = new SelectIconDialog(ItemNovoActivity.this, color, colorDark, itemImagem);
                 selectIconDialog.show();
             }
         });

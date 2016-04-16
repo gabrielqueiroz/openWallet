@@ -21,13 +21,9 @@
     <!-- Cores para objetos do Sistema -->
     <color name="vermelho">#E57373</color>
     <color name="vermelhoDark">#EF5350</color>
-    <color name="vermelhoGrad">#E53935</color>
-    <color name="vermelhoGradDark">#D32F2F</color>
 
     <color name="verde">#81C784</color>
     <color name="verdeDark">#66BB6A</color>
-    <color name="verdeGrad">#43A047</color>
-    <color name="verdeGradDark">#388E3C</color>
 
     <color name="amarelo">#FDD835</color>
     <color name="amareloDark">#FBC02D</color>

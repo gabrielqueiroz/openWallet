@@ -1,4 +1,4 @@
-package com.gqueiroz.database;
+package com.gqueiroz.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.gqueiroz.openwallet.R;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -106,10 +106,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void insertIntoHistoric(boolean credito, double balance, double value, int item, String referencia) {
         SQLiteDatabase sampleDB = this.getReadableDatabase();
 
-        java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+
         String hBalance = new DecimalFormat("##.##").format(balance);
         String hValue = new DecimalFormat("##.##").format(value);
         String tipo;
+
         if (credito)
             tipo = "C";
         else
@@ -121,7 +124,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(historicoReferencia, referencia);
         contentValues.put(historicoValor, hValue);
         contentValues.put(historicoSaldo, hBalance);
-        contentValues.put(historicoData, now.toString());
+        contentValues.put(historicoData, date);
 
         sampleDB.insertOrThrow(tableHistorico, null, contentValues);
     }
@@ -174,7 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 history.setId(cursor.getInt(cursor.getColumnIndex(historicoId)));
                 history.setBalance(cursor.getDouble(cursor.getColumnIndex(historicoSaldo)));
                 history.setReferencia(cursor.getString(cursor.getColumnIndex(historicoReferencia)));
-                history.setData(new Date(cursor.getLong(cursor.getColumnIndex(historicoData))));
+                history.setData(new java.sql.Date(cursor.getLong(cursor.getColumnIndex(historicoData))));
                 history.setTipo(cursor.getString(cursor.getColumnIndex(historicoTipo)));
                 history.setValor(cursor.getDouble(cursor.getColumnIndex(historicoValor)));
                 results.add(history);
