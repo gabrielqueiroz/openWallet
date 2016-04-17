@@ -4,9 +4,9 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/menu_ajuda"
+        android:id="@+id/menuDetails"
         app:showAsAction="collapseActionView|ifRoom"
-        android:icon="@drawable/ic_help_white_48dp"
-        android:title="Ajuda"/>
+        android:icon="@drawable/ic_widgets_white_24dp"
+        android:title="Detalhes"/>
 
 </menu>

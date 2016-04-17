@@ -206,25 +206,25 @@
                         <TextView
                             android:id="@+id/adicionaReferencia"
                             android:layout_width="0dp"
-                            android:layout_height="60dp"
+                            android:layout_height="50dp"
                             android:layout_weight=".25"
                             android:background="@color/colorPrimary"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="Adicionar"
+                            android:text="ADICIONAR"
                             android:textStyle="bold"
                             android:textColor="@color/textColorPrimary"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/removeReferencia"
                             android:layout_width="0dp"
-                            android:layout_height="60dp"
+                            android:layout_height="50dp"
                             android:layout_weight=".25"
                             android:background="@color/colorPrimaryDark"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="Remover"
+                            android:text="REMOVER"
                             android:textColor="@color/textColorPrimary"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 

@@ -51,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.itemValor.setText(Html.fromHtml(String.format("<b>R$</b> %s", String.valueOf(item.getValue()))));
         itemViewHolder.itemImagem.setImageDrawable(ContextCompat.getDrawable(context, Integer.parseInt(item.getImage())));
         itemViewHolder.backgroundItem.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColor())));
+        itemViewHolder.itemCard.setCardBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColor())));
 
         itemViewHolder.backgroundAdd.setBackgroundColor(ContextCompat.getColor(context, Integer.parseInt(item.getColorDark())));
         itemViewHolder.backgroundAdd.setOnClickListener(new View.OnClickListener() {

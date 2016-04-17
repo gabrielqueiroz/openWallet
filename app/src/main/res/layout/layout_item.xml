@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="2dp"
-    android:clickable="true">
+    android:clickable="true"
+    card_view:cardBackgroundColor="@color/colorPrimary">
 
     <RelativeLayout
         android:id="@+id/relativeCard"
@@ -27,7 +28,7 @@
                 android:id="@+id/backgroundAdd"
                 android:clickable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -35,7 +36,8 @@
                 <ImageView
                     android:id="@+id/itemAdd"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_vertical_align_top_white_24dp" />
 
@@ -45,7 +47,7 @@
                 android:id="@+id/backgroundRem"
                 android:clickable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -53,7 +55,8 @@
                 <ImageView
                     android:id="@+id/itemRem"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_vertical_align_bottom_white_24dp" />
 
@@ -63,7 +66,7 @@
                 android:id="@+id/backgroundDel"
                 android:clickable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -71,7 +74,8 @@
                 <ImageView
                     android:id="@+id/itemDel"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_delete_white_48dp" />
 
@@ -87,7 +91,8 @@
                 <ImageView
                     android:id="@+id/itemImagem"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_help_white_48dp" />
 
@@ -109,7 +114,8 @@
                     android:ellipsize="end"
                     android:text="Nome do item"
                     android:textSize="15sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorPrimary"/>
 
                 <TextView
                     android:id="@+id/itemValor"
@@ -118,7 +124,8 @@
                     android:layout_below="@id/itemNome"
                     android:ellipsize="end"
                     android:text="R$ 0.00"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:textColor="@color/textColorPrimary"/>
 
             </LinearLayout>
 
