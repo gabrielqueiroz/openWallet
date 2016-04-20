@@ -2,8 +2,12 @@
     <string name="app_name">OpenWallet</string>
 
     <string name="action_settings">Configuracoes</string>
-    <string name="title_activity_item">Carteira</string>
+    <string name="title_activity_item">Item</string>
     <string name="title_activity_item_add_rem">Adicionar | Remover</string>
     <string name="title_activity_item_novo">Novo Item</string>
+
+    <string name="default_value">R$ 0.00</string>
+    <string name="total_add">Total Adicionado</string>
+    <string name="total_rem">Total Removido</string>
 
 </resources>
