@@ -1,9 +1,10 @@
-package com.gqueiroz.openwallet;
+package com.gqueiroz.presentation;
 
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,8 +12,8 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -25,20 +26,40 @@ import com.gqueiroz.repository.Item;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ItemActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
-    private HistoryAdapter historyAdapter;
 
-    private Toolbar toolbar;
+    @Bind(R.id.recyclerViewHistory)
+    RecyclerView recyclerView;
 
-    private FloatingActionsMenu multipleActions;
-    private FloatingActionButton actionCredit;
-    private FloatingActionButton actionDebit;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
-    private LinearLayout itemBackground;
-    private ImageView itemIcon;
-    private TextView totalValue;
+    @Bind(R.id.multipleActions)
+    FloatingActionsMenu multipleActions;
+
+    @Bind(R.id.actionCredit)
+    FloatingActionButton actionCredit;
+
+    @Bind(R.id.actionDebit)
+    FloatingActionButton actionDebit;
+
+    @Bind(R.id.itemBackground)
+    GridLayout itemBackground;
+
+    @Bind(R.id.backgroundItemValue)
+    CardView backgroundItemValue;
+
+    @Bind(R.id.backgroundMonthSelected)
+    CardView backgroundMonthSelected;
+
+    @Bind(R.id.itemIcon)
+    ImageView itemIcon;
+
+    @Bind(R.id.totalValue)
+    TextView totalValue;
 
     private Item item = new Item();
 
@@ -47,7 +68,7 @@ public class ItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
-        findItemsByID();
+        ButterKnife.bind(this);
 
         Bundle extras = getIntent().getExtras();
 
@@ -67,12 +88,12 @@ public class ItemActivity extends AppCompatActivity {
         DatabaseHandler databaseHandler = new DatabaseHandler(getApplicationContext());
         List<History> history = databaseHandler.getAllHistory(item.getId());
 
-        linearLayoutManager = new LinearLayoutManager(ItemActivity.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ItemActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        historyAdapter = new HistoryAdapter(history, getApplicationContext());
+        HistoryAdapter historyAdapter = new HistoryAdapter(history, getApplicationContext());
         recyclerView.setAdapter(historyAdapter);
 
         actionCredit.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +122,7 @@ public class ItemActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_item, menu);
+        getMenuInflater().inflate(R.menu.menu_item, menu);
         return true;
     }
 
@@ -117,20 +138,20 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     public void changeColor(){
-        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
-        getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColorDark())));
-        itemBackground.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), Integer.parseInt(item.getColor())));
-        itemIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), Integer.parseInt(item.getImage())));
+        int colorPrimary = ContextCompat.getColor(getApplicationContext(),
+                Integer.parseInt(item.getColor()));
+        int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(),
+                Integer.parseInt(item.getColorDark()));
+
+        toolbar.setBackgroundColor(colorPrimary);
+        getWindow().setStatusBarColor(colorPrimaryDark);
+
+        itemBackground.setBackgroundColor(colorPrimary);
+        backgroundItemValue.setCardBackgroundColor(colorPrimaryDark);
+        backgroundMonthSelected.setCardBackgroundColor(colorPrimaryDark);
+
+        itemIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                Integer.parseInt(item.getImage())));
     }
 
-    public void findItemsByID() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewHistory);
-        multipleActions = (FloatingActionsMenu) findViewById(R.id.multipleActions);
-        actionCredit = (FloatingActionButton) findViewById(R.id.actionCredit);
-        actionDebit = (FloatingActionButton) findViewById(R.id.actionDebit);
-        itemBackground = (LinearLayout) findViewById(R.id.itemBackground);
-        itemIcon = (ImageView) findViewById(R.id.itemIcon);
-        totalValue = (TextView) findViewById(R.id.totalValue);
-    }
 }

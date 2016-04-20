@@ -1,4 +1,4 @@
-package com.gqueiroz.openwallet;
+package com.gqueiroz.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

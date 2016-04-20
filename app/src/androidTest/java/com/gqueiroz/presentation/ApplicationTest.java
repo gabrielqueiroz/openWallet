@@ -1,4 +1,4 @@
-package com.gqueiroz.openwallet;
+package com.gqueiroz.presentation;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

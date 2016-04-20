@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gqueiroz.openwallet.R;
+import com.gqueiroz.presentation.R;
 import com.gqueiroz.repository.History;
 
 import java.util.List;

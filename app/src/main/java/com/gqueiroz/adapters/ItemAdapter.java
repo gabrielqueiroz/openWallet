@@ -19,9 +19,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.gqueiroz.repository.DatabaseHandler;
 import com.gqueiroz.repository.Item;
-import com.gqueiroz.openwallet.ItemActivity;
-import com.gqueiroz.openwallet.R;
-import com.gqueiroz.openwallet.ItemAddRemActivity;
+import com.gqueiroz.presentation.ItemActivity;
+import com.gqueiroz.presentation.R;
+import com.gqueiroz.presentation.ItemAddRemActivity;
 
 import java.util.List;
 

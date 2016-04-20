@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.gqueiroz.openwallet.R;
+import com.gqueiroz.presentation.R;
 
 import java.util.Date;
 import java.text.DecimalFormat;

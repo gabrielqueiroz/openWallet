@@ -1,4 +1,4 @@
-package com.gqueiroz.openwallet;
+package com.gqueiroz.presentation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
