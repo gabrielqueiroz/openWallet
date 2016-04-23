@@ -9,5 +9,7 @@
     <string name="default_value">R$ 0.00</string>
     <string name="total_add">Total Adicionado</string>
     <string name="total_rem">Total Removido</string>
+    <string name="default_item_name">Nome do item</string>
+    <string name="default_entry_item">com [referencia] em [01-01-1999]</string>
 
 </resources>

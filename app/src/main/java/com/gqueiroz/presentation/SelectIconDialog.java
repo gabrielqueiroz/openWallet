@@ -35,7 +35,6 @@ public class SelectIconDialog extends Dialog implements View.OnClickListener{
     private ImageView image13;
     private ImageView image14;
     private ImageView image15;
-    
 
     private LinearLayout selectItemPrimary;
 

@@ -16,8 +16,8 @@
     <color name="colorGrad3">#42A5F5</color>
     <color name="colorGrad4">#2196F3</color>
 
-    <color name="colorSemiPrimary">#82000000</color>
-    <color name="colorSemiPrimaryPressed">#82000000</color>
+    <color name="colorSemiPrimary">#e3ffffff</color>
+    <color name="colorSemiPrimaryPressed">#e3ffffff</color>
 
     <!-- Cores para objetos do Sistema -->
     <color name="vermelhoLight">#F44336</color>
